@@ -27,7 +27,7 @@ interface Service {
 
     companion object {
         private const val BaseURL = "https://www.udemy.com/api-2.0/"
-        fun getInstance() = Retrofit.Builder().baseUrl(BaseURL).addConverterFactory(
+        fun getInstance(): Service = Retrofit.Builder().baseUrl(BaseURL).addConverterFactory(
             GsonConverterFactory.create()
         ).build().create(Service::class.java)
 

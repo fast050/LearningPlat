@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">LearningPlat</string>
+    <string name="content_description_media">Image of Course</string>
+    <string name="action_1">apply</string>
+    <string name="action_2">add to my list</string>
+    <string name="title">course name</string>
+    <string name="secondary_text">instertor name</string>
+    <string name="supporting_text">price type</string>
 </resources>
