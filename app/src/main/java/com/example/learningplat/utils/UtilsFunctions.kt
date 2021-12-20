@@ -1,6 +1,10 @@
 package com.example.learningplat.utils
 
+import com.example.learningplat.model.Courses
 
-private const val BaseURL = "https://www.udemy.com/api-2.0"
+
+private const val BaseURL = "https://www.udemy.com"
 
 fun String.formatURL()= BaseURL+this
+
+fun Courses.isPaid() = if (this.isPaid == true) "Paid" else "Free"

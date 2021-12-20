@@ -8,12 +8,15 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.learningplat.databinding.CourseItemBinding
 import com.example.learningplat.model.Courses
+import com.example.learningplat.utils.isPaid
 
-class CoursesAdapter : ListAdapter<Courses, RecyclerView.ViewHolder>(Diff) {
+class CoursesAdapter(val listener : (Int)->(Unit)) : ListAdapter<Courses, RecyclerView.ViewHolder>(Diff) {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        return CourseViewHolder.from(parent)
+        val layoutInflater = LayoutInflater.from(parent.context)
+        val binding = CourseItemBinding.inflate(layoutInflater, parent, false)
+        return CourseViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
@@ -24,33 +27,28 @@ class CoursesAdapter : ListAdapter<Courses, RecyclerView.ViewHolder>(Diff) {
     }
 
 
-    class CourseViewHolder(private val binding: CourseItemBinding) :
+   inner class CourseViewHolder(private val binding: CourseItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
+
+
+        init {
+            binding.root.setOnClickListener {
+                listener(adapterPosition)
+            }
+        }
 
         fun bind(course: Courses) {
 
             binding.apply {
-                courseTitle.text = course.title
-                Glide.with(binding.root).load(course.image480x270).into(courseImage)
-                courseInstructorName.text = course.publishedTitle
-                coursePriceType.text = if (course.isPaid == true) "Free" else "Paid"
-            }
-
-        }
-
-        companion object {
-            fun from(parent: ViewGroup): RecyclerView.ViewHolder {
-                val layoutInflater = LayoutInflater.from(parent.context)
-                val binding = CourseItemBinding.inflate(layoutInflater, parent, false)
-
-                return CourseViewHolder(binding)
+                courseTextTitle.text = course.title
+                Glide.with(binding.root).load(course.image480x270).into(courseImageCoursePicture)
+                courseTextInstructorName.text = "with ${course.visibleInstructors?.get(0)?.name}"
             }
         }
     }
 
 
     object Diff : DiffUtil.ItemCallback<Courses>() {
-
 
         override fun areItemsTheSame(oldItem: Courses, newItem: Courses): Boolean =
             oldItem.id == newItem.id

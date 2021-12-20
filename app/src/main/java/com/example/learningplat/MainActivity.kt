@@ -2,57 +2,33 @@ package com.example.learningplat
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import androidx.databinding.DataBindingUtil
-import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.learningplat.databinding.ActivityMainBinding
-import com.example.learningplat.network.Service
-import com.example.learningplat.ui.adapter.CoursesAdapter
-import com.example.learningplat.utils.formatURL
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
-import retrofit2.HttpException
+import androidx.navigation.NavController
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.AppBarConfiguration
+
+import androidx.navigation.ui.setupActionBarWithNavController
+
 
 class MainActivity : AppCompatActivity() {
 
-    private val TAG = "MainActivity"
-
+    lateinit var navController: NavController
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
 
-        val binding = DataBindingUtil.setContentView<ActivityMainBinding>(this,R.layout.activity_main)
-
-       // setContentView(R.layout.activity_main)
-        val adapter = CoursesAdapter()
-
-       GlobalScope.launch {
-
-           val service= Service.getInstance()
+        val navHostFragment=supportFragmentManager.findFragmentById(R.id.fragmentContainerView) as NavHostFragment
+        navController=navHostFragment.findNavController()
 
 
+        //if we use actionbar
+        val appBarConfiguration= AppBarConfiguration(navController.graph)
+        setupActionBarWithNavController(navController,appBarConfiguration)
+    }
 
 
-           try{
-               val courseList = service.getCourses().results
-               if (courseList != null) {
-                   withContext(Dispatchers.Main){
-                       binding.courseRecyclerView.layoutManager=LinearLayoutManager(this@MainActivity)
-                       binding.courseRecyclerView.adapter=adapter
-                       adapter.submitList(courseList)
-                   }
-
-               }
-           }catch (e: HttpException)
-           {
-               Log.d(TAG, "onCreate: ${e.response()}")
-           }
-
-       }
-
-
-
+    override fun onSupportNavigateUp(): Boolean {
+        return navController.navigateUp() ||super.onSupportNavigateUp()
     }
 }

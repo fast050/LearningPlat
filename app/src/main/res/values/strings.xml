@@ -6,4 +6,6 @@
     <string name="title">course name</string>
     <string name="secondary_text">instertor name</string>
     <string name="supporting_text">price type</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

@@ -18,14 +18,15 @@
 
             <!-- Media -->
             <ImageView
-                android:id="@+id/course_Image"
+                android:id="@+id/course_image_course_picture"
                 android:layout_width="match_parent"
                 android:layout_height="194dp"
                 android:contentDescription="@string/content_description_media"
                 android:scaleType="centerCrop"
+                tools:src="@tools:sample/backgrounds/scenic"
                  />
 
-            <LinearLayout
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
@@ -33,54 +34,29 @@
 
                 <!-- Title, secondary and supporting text -->
                 <TextView
-                    android:id="@+id/course_Title"
-                    android:layout_width="wrap_content"
+                    android:id="@+id/course_text_Title"
+                    style="@style/LearningPlat.Text.Title"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:text="@string/title"
-                    android:textAppearance="?attr/textAppearanceHeadline6" />
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:id="@+id/course_instructor_name"
-                    android:layout_width="wrap_content"
+                    android:id="@+id/course_text_instructor_name"
+                    style="@style/LearningPlat.Text.SubTitle"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/spacing_small"
+                    android:layout_marginTop="8dp"
                     android:text="@string/secondary_text"
-                    android:textAppearance="?attr/textAppearanceBody2"
-                    android:textColor="?android:attr/textColorSecondary" />
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="@+id/course_text_Title"
+                    app:layout_constraintTop_toBottomOf="@+id/course_text_Title" />
 
-                <TextView
-                    android:id="@+id/course_price_type"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:text="@string/supporting_text"
-                    android:textAppearance="?attr/textAppearanceBody2"
-                    android:textColor="?android:attr/textColorSecondary" />
-
-            </LinearLayout>
-
-            <!-- Buttons -->
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="8dp"
-                android:orientation="horizontal">
-
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/course_Apply"
-                    style="?attr/borderlessButtonStyle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="8dp"
-                    android:text="@string/action_1" />
-
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/course_Add_To_MyList"
-                    style="?attr/borderlessButtonStyle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/action_2" />
-            </LinearLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
         </LinearLayout>
 

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/coursesListFragment">
+    <fragment
+        android:id="@+id/courseDetailFragment"
+        android:name="com.example.learningplat.ui.courses.CourseDetailFragment"
+        android:label="CourseDetailFragment"
+        tools:layout="@layout/fragment_course_detail">
+        <argument
+            android:name="Course_Item"
+            app:argType="com.example.learningplat.model.Courses"
+            app:nullable="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/coursesListFragment"
+        android:name="com.example.learningplat.ui.courses.CoursesListFragment"
+        android:label="CoursesListFragment"
+        tools:layout="@layout/fragment_courses_list">
+        <action
+            android:id="@+id/action_coursesListFragment_to_courseDetailFragment"
+            app:destination="@id/courseDetailFragment" />
+
+    </fragment>
+
+
+</navigation>

@@ -1,7 +1,10 @@
 package com.example.learningplat.network
 
+import androidx.lifecycle.LiveData
 import com.example.learningplat.model.Courses
 import com.example.learningplat.model.CoursesResponse
+import retrofit2.Call
+import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
@@ -16,13 +19,13 @@ interface Service {
                 "J0MHFGV2JhSHNDSm4zUjZHQjBTNkVhT3k2YndXeTF0R0pZU3hRMk1JT2lNZGlBUlFQRjBDanhhRQ=="
     )
     @GET("courses/")
-    suspend fun getCourses(
+     fun getCourses(
         @Query("search") search: String?=null,
         @Query("page") page: String?=null,
         @Query("category") category: String?=null,
-        @Query("price") price: String? =null
+        @Query("price") priceType: String? =null
 
-    ): CoursesResponse
+    ): Call<CoursesResponse>
 
 
     companion object {
@@ -33,9 +36,6 @@ interface Service {
 
     }
 
-    enum class Price(val priceValue: String){
-        FREE("price-free"),
-        PAID("price-paid")
-    }
+
 
 }

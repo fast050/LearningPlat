@@ -14,7 +14,7 @@ data class CoursesResponse(
     @SerializedName("previous")
     val previous: String?,
     @SerializedName("results")
-    val results: List<Courses?>?,
+    val results: List<Courses>?,
     @SerializedName("search_tracking_id")
     val searchTrackingId: String?
 ) : Parcelable {
