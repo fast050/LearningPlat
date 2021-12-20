@@ -1,5 +1,5 @@
 # LearningPlat
-An App That Helps Learner across the world to find high quality courses on Udemy to learn new things and open a new door of life chances.
+An App That Helps Learners across the world to find high-quality courses on Udemy to learn new things and open a new door of life chances.
 
 # Description 
 - Search any Courses On Udemy.
