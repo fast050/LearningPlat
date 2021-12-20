@@ -35,7 +35,7 @@ class CoursesViewModel(private val coursesRepository: CoursesRepository): ViewMo
     }
 
     val getCoursesByPrice = priceType.switchMap {
-        _getCourses(priceType = it)
+        _getCourses(search = query.value ,priceType = it)
         _coursesList
     }
 
