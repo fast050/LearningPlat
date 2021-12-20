@@ -4,6 +4,7 @@ import androidx.lifecycle.*
 import com.example.learningplat.model.Courses
 import com.example.learningplat.model.CoursesResponse
 import com.example.learningplat.repository.CoursesRepository
+import kotlinx.coroutines.flow.combine
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -17,22 +18,32 @@ enum class Price(val priceValue: String){
 class CoursesViewModel(private val coursesRepository: CoursesRepository): ViewModel()
 {
 
-//    val courseItem = MutableLiveData<Courses>()
-//    val
-
    private val _coursesList = MutableLiveData<List<Courses>>()
-    val coursesList :LiveData<List<Courses>>
-          get() = _coursesList
+
 
    private  val _errorMessage = MutableLiveData<String>()
     val errorMessage :LiveData<String>
     get() = _errorMessage
 
+    val query = MutableLiveData<String?>(null)
+    val priceType = MutableLiveData<Price?>(null)
 
-    fun getCourses(search:String?=null
-                   ,page:String?=null,
-                   category:String?=null,
-                   priceType:Price?=null) {
+
+    val getCourses = query.switchMap {
+        _getCourses(search = it)
+        _coursesList
+    }
+
+    val getCoursesByPrice = priceType.switchMap {
+        _getCourses(priceType = it)
+        _coursesList
+    }
+
+
+    private fun _getCourses(search:String?=null
+                            , page:String?=null,
+                            category:String?=null,
+                            priceType:Price?=null) {
 
         val response = coursesRepository.getCourses(search,page,category,priceType?.priceValue)
 

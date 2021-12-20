@@ -20,10 +20,6 @@ class CourseDetailFragment : Fragment() {
 
     lateinit var binding: FragmentCourseDetailBinding
 
-//    private val viewModel:CoursesViewModel by viewModels{
-//        CoursesViewModel.CoursesViewModelFactory((requireActivity().application as CoursesApplication).repository)
-//    }
-
     private val args: CourseDetailFragmentArgs by navArgs()
 
 
