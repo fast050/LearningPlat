@@ -33,14 +33,16 @@
                 android:padding="16dp">
 
                 <!-- Title, secondary and supporting text -->
+
                 <TextView
                     android:id="@+id/course_text_Title"
                     style="@style/LearningPlat.Text.Title"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
                     android:text="@string/title"
+                    app:layout_constraintBottom_toTopOf="@+id/course_text_instructor_name"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -49,12 +51,12 @@
                     style="@style/LearningPlat.Text.SubTitle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="16dp"
                     android:text="@string/secondary_text"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintStart_toStartOf="@+id/course_text_Title"
-                    app:layout_constraintTop_toBottomOf="@+id/course_text_Title" />
+                    app:layout_constraintHorizontal_bias="0.625"
+                    app:layout_constraintStart_toStartOf="@+id/course_text_Title" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

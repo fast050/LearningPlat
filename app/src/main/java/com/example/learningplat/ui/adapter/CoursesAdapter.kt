@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.learningplat.databinding.CourseItemBinding
 import com.example.learningplat.model.Courses
-import com.example.learningplat.utils.isPaid
+
 
 class CoursesAdapter(val listener : (Int)->(Unit)) : ListAdapter<Courses, RecyclerView.ViewHolder>(Diff) {
 

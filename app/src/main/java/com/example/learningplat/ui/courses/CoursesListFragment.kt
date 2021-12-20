@@ -38,7 +38,7 @@ class CoursesListFragment : Fragment() {
         val adapter = CoursesAdapter { position ->
             val course = viewModel.coursesList.value?.get(position)
             val action = CoursesListFragmentDirections.actionCoursesListFragmentToCourseDetailFragment(
-                    course
+                    course,course?.title ?: "Course"
                 )
             findNavController().navigate(action)
         }
