@@ -7,6 +7,8 @@ An App That Helps Learners across the world to find high-quality courses on Udem
 # Third Party 
 - Retrofit
 - Glide
+
+# JetPack Library
 - Navigation component
 - data Binding
 
