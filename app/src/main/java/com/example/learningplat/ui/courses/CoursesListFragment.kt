@@ -1,16 +1,21 @@
 package com.example.learningplat.ui.courses
 
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import androidx.appcompat.widget.SearchView
-import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import androidx.paging.map
 import com.example.learningplat.CoursesApplication
 import com.example.learningplat.R
 import com.example.learningplat.databinding.FragmentCoursesListBinding
 import com.example.learningplat.ui.adapter.CoursesAdapter
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 
 
 class CoursesListFragment : Fragment() {
@@ -47,7 +52,7 @@ class CoursesListFragment : Fragment() {
             override fun onQueryTextSubmit(query: String?): Boolean {
 
                 query?.let {
-                    viewModel.query.value=it
+                    viewModel.query.value = it
                 }
 
                 return true
@@ -61,45 +66,65 @@ class CoursesListFragment : Fragment() {
 
     private fun setUpRecyclerView() {
 
-        val adapter = CoursesAdapter { position ->
-            val course = viewModel.getCourses.value?.get(position)
+        val adapter = CoursesAdapter { courseClicked ->
             val action =
                 CoursesListFragmentDirections.actionCoursesListFragmentToCourseDetailFragment(
-                    course, course?.title ?: "Course"
+                    courseClicked, courseClicked.title ?: "Course"
                 )
             findNavController().navigate(action)
+
         }
         binding.courseRecyclerView.adapter = adapter
 
 
-
-        viewModel.getCourses.observe(viewLifecycleOwner) {
-            if(binding.messageToUser.isVisible)
-            binding.messageToUser.visibility = View.INVISIBLE
-
-            adapter.submitList(it)
+        viewModel.pagingCourses.observe(viewLifecycleOwner) {
+            adapter.submitData(viewLifecycleOwner.lifecycle, it)
         }
 
-        viewModel.getCoursesByPrice.observe(viewLifecycleOwner)
-        {
-            adapter.submitList(it)
-        }
+
 
         viewModel.errorMessage.observe(viewLifecycleOwner) {
-            binding.messageToUser.visibility = View.VISIBLE
             binding.messageToUser.text = it
         }
+
+
+        viewModel.state.observe(viewLifecycleOwner) {
+            when (it) {
+
+                ConnectionState.LOADING -> {
+                    binding.messageToUser.visibility = View.GONE
+                    binding.courseRecyclerView.visibility = View.GONE
+                    binding.progressBar.visibility = View.VISIBLE
+
+                }
+
+                ConnectionState.SUCCEED -> {
+                    binding.messageToUser.visibility = View.GONE
+                    binding.courseRecyclerView.visibility = View.VISIBLE
+                    binding.progressBar.visibility = View.GONE
+
+                }
+
+                ConnectionState.FAILED -> {
+                    binding.messageToUser.visibility = View.VISIBLE
+                    binding.courseRecyclerView.visibility = View.GONE
+                    binding.progressBar.visibility = View.GONE
+                }
+            }
+
+        }
+
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
 
-        return when(item.itemId) {
+        return when (item.itemId) {
             R.id.Free_type -> {
-                viewModel.priceType.value=Price.FREE
+                viewModel.priceType.value = Price.FREE
                 true
             }
             R.id.Paid_type -> {
-                viewModel.priceType.value=Price.PAID
+                viewModel.priceType.value = Price.PAID
                 true
             }
 

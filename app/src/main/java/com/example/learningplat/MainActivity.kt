@@ -8,22 +8,27 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 
 import androidx.navigation.ui.setupActionBarWithNavController
+import com.example.learningplat.databinding.ActivityMainBinding
 
 
 class MainActivity : AppCompatActivity() {
 
     lateinit var navController: NavController
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        val binding =ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+
 
         val navHostFragment=supportFragmentManager.findFragmentById(R.id.fragmentContainerView) as NavHostFragment
         navController=navHostFragment.findNavController()
 
 
         //if we use actionbar
-        val appBarConfiguration= AppBarConfiguration(navController.graph)
+        val appBarConfiguration= AppBarConfiguration(navController.graph,binding.drawerLayout)
         setupActionBarWithNavController(navController,appBarConfiguration)
     }
 

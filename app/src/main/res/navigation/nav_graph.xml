@@ -11,7 +11,7 @@
         tools:layout="@layout/fragment_course_detail">
         <argument
             android:name="Course_Item"
-            app:argType="com.example.learningplat.model.Courses"
+            app:argType="com.example.learningplat.data.model.Courses"
             app:nullable="true" />
         <argument
             android:name="courseName"

@@ -1,84 +1,66 @@
 package com.example.learningplat.ui.courses
 
 import androidx.lifecycle.*
-import com.example.learningplat.model.Courses
-import com.example.learningplat.model.CoursesResponse
+import androidx.paging.cachedIn
+import com.example.learningplat.data.model.Courses
 import com.example.learningplat.repository.CoursesRepository
-import kotlinx.coroutines.flow.combine
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import kotlinx.coroutines.launch
+import java.lang.Exception
 import java.lang.IllegalArgumentException
 
-enum class Price(val priceValue: String){
+enum class Price(val priceValue: String) {
     FREE("price-free"),
     PAID("price-paid")
 }
 
-class CoursesViewModel(private val coursesRepository: CoursesRepository): ViewModel()
-{
+enum class ConnectionState {
+    LOADING, SUCCEED, FAILED
+}
 
-   private val _coursesList = MutableLiveData<List<Courses>>()
+class CoursesViewModel(private val coursesRepository: CoursesRepository) : ViewModel() {
 
+    private var _state = MutableLiveData<ConnectionState>()
+    val state: LiveData<ConnectionState>
+        get() = _state
 
-   private  val _errorMessage = MutableLiveData<String>()
-    val errorMessage :LiveData<String>
-    get() = _errorMessage
+    private val _errorMessage = MutableLiveData<String>()
+    val errorMessage: LiveData<String>
+        get() = _errorMessage
 
     val query = MutableLiveData<String?>(null)
     val priceType = MutableLiveData<Price?>(null)
 
-
-    val getCourses = query.switchMap {
-        _getCourses(search = it)
-        _coursesList
+    val pagingCourses = (PairMediatorLiveData(query, priceType)).switchMap {
+        _state.value = ConnectionState.LOADING
+        val result = coursesRepository.getPagedCourses(
+            priceType = it.second?.priceValue,
+            search = it.first
+        ).cachedIn(viewModelScope).asLiveData().distinctUntilChanged()
+        _state.value = ConnectionState.SUCCEED
+        result
     }
 
-    val getCoursesByPrice = priceType.switchMap {
-        _getCourses(search = query.value ,priceType = it)
-        _coursesList
-    }
-
-
-    private fun _getCourses(search:String?=null
-                            , page:String?=null,
-                            category:String?=null,
-                            priceType:Price?=null) {
-
-        val response = coursesRepository.getCourses(search,page,category,priceType?.priceValue)
-
-        response.enqueue(object : Callback<CoursesResponse>
-        {
-            override fun onResponse(
-                call: Call<CoursesResponse>,
-                response: Response<CoursesResponse>
-            ) {
-                if(response.code()==200)
-                {
-                    response.body()?.results?.let {
-
-                        _coursesList.postValue(it)
-                    }
-
-                }
-
-            }
-
-            override fun onFailure(call: Call<CoursesResponse>, t: Throwable) {
-               _errorMessage.postValue("Check Your Connection")
-            }
-
-        })
-    }
-
-    class CoursesViewModelFactory constructor(private val repository: CoursesRepository): ViewModelProvider.Factory {
+    class CoursesViewModelFactory constructor(private val repository: CoursesRepository) :
+        ViewModelProvider.Factory {
 
         override fun <T : ViewModel> create(modelClass: Class<T>): T {
-            return if(modelClass.isAssignableFrom(CoursesViewModel::class.java))
+            return if (modelClass.isAssignableFrom(CoursesViewModel::class.java))
                 CoursesViewModel(this.repository) as T
             else
                 throw IllegalArgumentException("ViewModel Not Found")
         }
 
+    }
+
+    class PairMediatorLiveData<F, S>(firstLiveData: LiveData<F>, secondLiveData: LiveData<S>) :
+        MediatorLiveData<Pair<F?, S?>>() {
+        init {
+            addSource(firstLiveData) { firstLiveDataValue: F ->
+                value = firstLiveDataValue to secondLiveData.value
+            }
+            addSource(secondLiveData) { secondLiveDataValue: S ->
+                value = firstLiveData.value to secondLiveDataValue
+            }
+        }
     }
 }

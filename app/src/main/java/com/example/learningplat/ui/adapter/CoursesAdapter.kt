@@ -2,15 +2,16 @@ package com.example.learningplat.ui.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.learningplat.databinding.CourseItemBinding
-import com.example.learningplat.model.Courses
+import com.example.learningplat.data.model.Courses
 
 
-class CoursesAdapter(val listener : (Int)->(Unit)) : ListAdapter<Courses, RecyclerView.ViewHolder>(Diff) {
+class CoursesAdapter(val listener : (Courses)->(Unit)) : PagingDataAdapter<Courses, RecyclerView.ViewHolder>(Diff) {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -22,7 +23,9 @@ class CoursesAdapter(val listener : (Int)->(Unit)) : ListAdapter<Courses, Recycl
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         if (holder is CourseViewHolder) {
             val item = getItem(position)
-            holder.bind(item)
+            item?.let {
+                holder.bind(it)
+            }
         }
     }
 
@@ -33,7 +36,11 @@ class CoursesAdapter(val listener : (Int)->(Unit)) : ListAdapter<Courses, Recycl
 
         init {
             binding.root.setOnClickListener {
-                listener(adapterPosition)
+                val coursesClicked = getItem(bindingAdapterPosition)
+
+                coursesClicked?.let {
+                    listener(it)
+                }
             }
         }
 

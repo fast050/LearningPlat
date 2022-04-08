@@ -12,6 +12,7 @@ import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.example.learningplat.CoursesApplication
 import com.example.learningplat.R
+import com.example.learningplat.data.model.Courses
 import com.example.learningplat.databinding.FragmentCourseDetailBinding
 import com.example.learningplat.utils.formatURL
 
@@ -33,9 +34,8 @@ class CourseDetailFragment : Fragment() {
 
         binding.apply {
 
-            val author = args.courseItem?.visibleInstructors?.get(0)
             val courseItem = args.courseItem
-
+            val author = args.courseItem?.visibleInstructors?.get(0)
 
 
             courseDetailTextInstructorName.text = author?.name
