@@ -4,6 +4,8 @@ import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.example.learningplat.data.model.Courses
 import com.example.learningplat.data.network.CoursesApiService
+import retrofit2.HttpException
+import java.io.IOException
 import java.lang.Exception
 
 class CoursesPagingSource(
@@ -37,7 +39,9 @@ class CoursesPagingSource(
 
             LoadResult.Page(data = data, prevKey = prev, nextKey = next)
 
-        } catch (e: Exception) {
+        } catch (e: HttpException) {
+            LoadResult.Error(e)
+        }catch (e:IOException) {
             LoadResult.Error(e)
         }
     }

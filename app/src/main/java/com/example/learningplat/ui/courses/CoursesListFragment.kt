@@ -4,15 +4,18 @@ import android.os.Bundle
 import android.util.Log
 import android.view.*
 import androidx.appcompat.widget.SearchView
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import androidx.paging.LoadState
 import androidx.paging.map
 import com.example.learningplat.CoursesApplication
 import com.example.learningplat.R
 import com.example.learningplat.databinding.FragmentCoursesListBinding
 import com.example.learningplat.ui.adapter.CoursesAdapter
+import com.example.learningplat.ui.adapter.CoursesLoadStateAdapter
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -21,7 +24,8 @@ import kotlinx.coroutines.launch
 class CoursesListFragment : Fragment() {
 
 
-    private lateinit var binding: FragmentCoursesListBinding
+    private var _binding: FragmentCoursesListBinding? = null
+    private val binding get() = _binding!!
     private val viewModel: CoursesViewModel by viewModels {
         CoursesViewModel.CoursesViewModelFactory((requireActivity().application as CoursesApplication).repository)
     }
@@ -31,13 +35,14 @@ class CoursesListFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
 
-        binding = FragmentCoursesListBinding.inflate(inflater, container, false)
-
-        setUpRecyclerView()
-
+        _binding = FragmentCoursesListBinding.inflate(inflater, container, false)
         setHasOptionsMenu(true)
-
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        setUpRecyclerView()
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -48,6 +53,7 @@ class CoursesListFragment : Fragment() {
         val searchItem = menu.findItem(R.id.action_search)
         val searchView = searchItem.actionView as SearchView
 
+        //search courses list
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
 
@@ -74,43 +80,27 @@ class CoursesListFragment : Fragment() {
             findNavController().navigate(action)
 
         }
-        binding.courseRecyclerView.adapter = adapter
 
+
+
+        binding.courseRecyclerView.adapter = adapter.withLoadStateFooter(
+            CoursesLoadStateAdapter{adapter.retry()}
+        )
 
         viewModel.pagingCourses.observe(viewLifecycleOwner) {
             adapter.submitData(viewLifecycleOwner.lifecycle, it)
         }
 
+        adapter.addLoadStateListener { loadState ->
 
+           // binding.progressBar.playAnimation()
+           // animationView.cancelAnimation();
 
-        viewModel.errorMessage.observe(viewLifecycleOwner) {
-            binding.messageToUser.text = it
-        }
+            binding.messageToUser.isVisible = loadState.source.refresh is LoadState.Error
+            binding.courseRecyclerView.isVisible =
+                loadState.source.refresh is LoadState.NotLoading
+            binding.progressBar.isVisible = loadState.source.refresh is LoadState.Loading
 
-
-        viewModel.state.observe(viewLifecycleOwner) {
-            when (it) {
-
-                ConnectionState.LOADING -> {
-                    binding.messageToUser.visibility = View.GONE
-                    binding.courseRecyclerView.visibility = View.GONE
-                    binding.progressBar.visibility = View.VISIBLE
-
-                }
-
-                ConnectionState.SUCCEED -> {
-                    binding.messageToUser.visibility = View.GONE
-                    binding.courseRecyclerView.visibility = View.VISIBLE
-                    binding.progressBar.visibility = View.GONE
-
-                }
-
-                ConnectionState.FAILED -> {
-                    binding.messageToUser.visibility = View.VISIBLE
-                    binding.courseRecyclerView.visibility = View.GONE
-                    binding.progressBar.visibility = View.GONE
-                }
-            }
 
         }
 
@@ -118,6 +108,7 @@ class CoursesListFragment : Fragment() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
 
+        //filter courses list by (free or paid) price
         return when (item.itemId) {
             R.id.Free_type -> {
                 viewModel.priceType.value = Price.FREE
@@ -133,5 +124,9 @@ class CoursesListFragment : Fragment() {
 
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
 
 }

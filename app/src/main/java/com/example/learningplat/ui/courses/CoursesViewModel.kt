@@ -13,31 +13,19 @@ enum class Price(val priceValue: String) {
     PAID("price-paid")
 }
 
-enum class ConnectionState {
-    LOADING, SUCCEED, FAILED
-}
-
 class CoursesViewModel(private val coursesRepository: CoursesRepository) : ViewModel() {
-
-    private var _state = MutableLiveData<ConnectionState>()
-    val state: LiveData<ConnectionState>
-        get() = _state
-
-    private val _errorMessage = MutableLiveData<String>()
-    val errorMessage: LiveData<String>
-        get() = _errorMessage
 
     val query = MutableLiveData<String?>(null)
     val priceType = MutableLiveData<Price?>(null)
 
     val pagingCourses = (PairMediatorLiveData(query, priceType)).switchMap {
-        _state.value = ConnectionState.LOADING
-        val result = coursesRepository.getPagedCourses(
+
+        coursesRepository.getPagedCourses(
             priceType = it.second?.priceValue,
             search = it.first
-        ).cachedIn(viewModelScope).asLiveData().distinctUntilChanged()
-        _state.value = ConnectionState.SUCCEED
-        result
+            ).cachedIn(viewModelScope).asLiveData()
+
+
     }
 
     class CoursesViewModelFactory constructor(private val repository: CoursesRepository) :

@@ -1,12 +1,14 @@
 package com.example.learningplat.ui.adapter
 
+import android.content.Context
+import android.content.res.Resources
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.learningplat.R
 import com.example.learningplat.databinding.CourseItemBinding
 import com.example.learningplat.data.model.Courses
 
@@ -17,7 +19,7 @@ class CoursesAdapter(val listener : (Courses)->(Unit)) : PagingDataAdapter<Cours
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
         val binding = CourseItemBinding.inflate(layoutInflater, parent, false)
-        return CourseViewHolder(binding)
+        return CourseViewHolder(binding,parent.context)
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
@@ -30,11 +32,13 @@ class CoursesAdapter(val listener : (Courses)->(Unit)) : PagingDataAdapter<Cours
     }
 
 
-   inner class CourseViewHolder(private val binding: CourseItemBinding) :
+   inner class CourseViewHolder(private val binding: CourseItemBinding, context : Context) :
         RecyclerView.ViewHolder(binding.root) {
 
+       private val resources: Resources = context.resources
 
-        init {
+
+       init {
             binding.root.setOnClickListener {
                 val coursesClicked = getItem(bindingAdapterPosition)
 
@@ -46,10 +50,11 @@ class CoursesAdapter(val listener : (Courses)->(Unit)) : PagingDataAdapter<Cours
 
         fun bind(course: Courses) {
 
+
             binding.apply {
                 courseTextTitle.text = course.title
                 Glide.with(binding.root).load(course.image480x270).into(courseImageCoursePicture)
-                courseTextInstructorName.text = "with ${course.visibleInstructors?.get(0)?.name}"
+                courseTextInstructorName.text = resources.getString(R.string.with_instructor,course.visibleInstructors?.get(0)?.name)
             }
         }
     }
