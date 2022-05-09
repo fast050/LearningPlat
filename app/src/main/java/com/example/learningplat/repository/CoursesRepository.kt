@@ -7,23 +7,15 @@ import com.example.learningplat.data.CoursesPagingSource
 import com.example.learningplat.data.model.Courses
 import com.example.learningplat.data.network.CoursesApiService
 import kotlinx.coroutines.flow.Flow
+import javax.inject.Inject
 
 
-class CoursesRepository(private val coursesApi: CoursesApiService){
+interface CoursesRepository {
 
-
-//   suspend fun getCourses(search:String?=null
-//                         ,page:String?=null,
-//                         category:String?=null,
-//                         priceType:String?=null) = coursesApi.getCourses(search,page,category,priceType)
-//
-    fun getPagedCourses(search:String?=null,
-                                category:String?=null,
-                                priceType:String?=null): Flow<PagingData<Courses>> {
-      return  Pager(PagingConfig(10,2,false)
-        , pagingSourceFactory = {CoursesPagingSource(coursesApi,search,category,priceType)}).flow
-    }
-
-
+    fun getPagedCourses(
+        search: String? = null,
+        category: String? = null,
+        priceType: String? = null
+    ): Flow<PagingData<Courses>>
 
 }

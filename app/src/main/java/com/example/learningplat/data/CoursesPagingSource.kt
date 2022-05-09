@@ -7,8 +7,9 @@ import com.example.learningplat.data.network.CoursesApiService
 import retrofit2.HttpException
 import java.io.IOException
 import java.lang.Exception
+import javax.inject.Inject
 
-class CoursesPagingSource(
+class CoursesPagingSource @Inject constructor(
     private val coursesApiService: CoursesApiService,
     private val searchQuery: String? = null,
     private val category: String? = null,

@@ -16,19 +16,20 @@ import com.example.learningplat.R
 import com.example.learningplat.databinding.FragmentCoursesListBinding
 import com.example.learningplat.ui.adapter.CoursesAdapter
 import com.example.learningplat.ui.adapter.CoursesLoadStateAdapter
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 
+@AndroidEntryPoint
 class CoursesListFragment : Fragment() {
 
 
     private var _binding: FragmentCoursesListBinding? = null
     private val binding get() = _binding!!
-    private val viewModel: CoursesViewModel by viewModels {
-        CoursesViewModel.CoursesViewModelFactory((requireActivity().application as CoursesApplication).repository)
-    }
+
+    private val viewModel by viewModels<CoursesViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

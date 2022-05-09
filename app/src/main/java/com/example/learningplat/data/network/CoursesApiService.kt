@@ -29,12 +29,5 @@ interface CoursesApiService {
 }
 
 object CoursesApi {
-
-    private const val BaseURL = "https://www.udemy.com/api-2.0/"
-
-    val retrofitService: CoursesApiService by lazy {
-        Retrofit.Builder().baseUrl(BaseURL).addConverterFactory(GsonConverterFactory.create())
-            .build().create(CoursesApiService::class.java)
-    }
-
+    const val BaseURL = "https://www.udemy.com/api-2.0/"
 }

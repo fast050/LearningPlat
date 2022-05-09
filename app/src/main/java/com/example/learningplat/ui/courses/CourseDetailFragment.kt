@@ -11,8 +11,10 @@ import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.example.learningplat.databinding.FragmentCourseDetailBinding
 import com.example.learningplat.utils.formatURL
+import dagger.hilt.android.AndroidEntryPoint
 
 
+@AndroidEntryPoint
 class CourseDetailFragment : Fragment() {
 
     private var _binding: FragmentCourseDetailBinding?=null
@@ -26,7 +28,6 @@ class CourseDetailFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-
         _binding = FragmentCourseDetailBinding.inflate(inflater, container, false)
         return binding.root
     }
