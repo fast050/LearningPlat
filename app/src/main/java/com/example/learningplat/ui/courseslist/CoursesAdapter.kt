@@ -1,4 +1,4 @@
-package com.example.learningplat.ui.adapter
+package com.example.learningplat.ui.courseslist
 
 import android.content.Context
 import android.content.res.Resources
@@ -10,10 +10,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.learningplat.R
 import com.example.learningplat.databinding.CourseItemBinding
-import com.example.learningplat.data.model.Courses
+import com.example.learningplat.data.model.courseslist.Courses
 
 
-class CoursesAdapter(val listener : (Courses)->(Unit)) : PagingDataAdapter<Courses, RecyclerView.ViewHolder>(Diff) {
+class CoursesAdapter(val listener : (Courses)->(Unit)) : PagingDataAdapter<Courses, RecyclerView.ViewHolder>(
+    Diff
+) {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {

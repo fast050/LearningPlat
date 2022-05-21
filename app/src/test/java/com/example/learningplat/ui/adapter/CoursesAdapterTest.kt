@@ -2,15 +2,12 @@ package com.example.learningplat.ui.adapter
 
 import android.content.Context
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import com.example.learningplat.data.model.Courses
+import com.example.learningplat.data.model.courseslist.Courses
 import com.example.learningplat.data.network.CoursesApiService
 import com.example.learningplat.repository.DefaultCoursesRepository
-import com.example.learningplat.repository.FakeCoursesRepository
-import com.example.learningplat.ui.courses.CoursesViewModel
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
+import com.example.learningplat.ui.courseslist.CoursesAdapter
+import com.example.learningplat.ui.courseslist.CoursesViewModel
 import kotlinx.coroutines.runBlocking
-import kotlinx.coroutines.withContext
 import org.junit.Assert.*
 import org.junit.Before
 import org.junit.Rule

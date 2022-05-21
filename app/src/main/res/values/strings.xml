@@ -13,4 +13,10 @@
     <string name="with_instructor">with %1$s</string>
     <string name="retry">retry</string>
     <string name="check_your_connection">Check your connection</string>
+    <string name="user_comment_example">This course the best i learn so much from it i will recommend to take it . i will add so much to your life</string>
+    <string name="comment_time_example">2 years ago</string>
+    <string name="user_name_example">Joan Perkins</string>
+    <string name="title_activity_detail">DetailActivity</string>
+    <string name="tab_text_1">Tab 1</string>
+    <string name="tab_text_2">Tab 2</string>
 </resources>

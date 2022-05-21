@@ -1,4 +1,4 @@
-package com.example.learningplat.data.model
+package com.example.learningplat.data.model.courseslist
 
 import android.os.Parcelable
 import androidx.room.Entity
@@ -36,8 +36,8 @@ data class Courses(
     val isPracticeTestCourse: Boolean?=null,
 //        @SerializedName("lecture_search_result")
 //        val lectureSearchResult: Any?,
-//        @SerializedName("order_in_results")
-//        val orderInResults: Any?,
+        @SerializedName("order_in_results")
+        val orderInResults: Int?,
 //        @SerializedName("predictive_score")
 //        val predictiveScore: Any?,
     @SerializedName("price")

@@ -2,11 +2,10 @@ package com.example.learningplat.data
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
-import com.example.learningplat.data.model.Courses
+import com.example.learningplat.data.model.courseslist.Courses
 import com.example.learningplat.data.network.CoursesApiService
 import retrofit2.HttpException
 import java.io.IOException
-import java.lang.Exception
 import javax.inject.Inject
 
 class CoursesPagingSource @Inject constructor(

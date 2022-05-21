@@ -1,4 +1,4 @@
-package com.example.learningplat.ui.adapter
+package com.example.learningplat.ui.courseslist
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -6,12 +6,12 @@ import androidx.core.view.isVisible
 import androidx.paging.LoadState
 import androidx.paging.LoadStateAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.learningplat.databinding.LoadingStateLayoutBinding
+import com.example.learningplat.databinding.CoursesLoadingStateLayoutBinding
 
 class CoursesLoadStateAdapter(private val retry :()->Unit):LoadStateAdapter<CoursesLoadStateAdapter.CoursesLoadStateViewHolder>()
 {
 
-   inner class CoursesLoadStateViewHolder(private val binding:LoadingStateLayoutBinding):RecyclerView.ViewHolder(binding.root)
+   inner class CoursesLoadStateViewHolder(private val binding:CoursesLoadingStateLayoutBinding):RecyclerView.ViewHolder(binding.root)
     {
         init {
             binding.retryButton.setOnClickListener {
@@ -25,10 +25,10 @@ class CoursesLoadStateAdapter(private val retry :()->Unit):LoadStateAdapter<Cour
             binding.apply {
 
                 if (loadState is LoadState.Error)
-                errorMsg.text =loadState.error.localizedMessage
+                errorText.text =loadState.error.localizedMessage
 
                 loadingImage.isVisible = loadState is LoadState.Loading
-                errorMsg.isVisible = loadState is LoadState.Error
+                errorText.isVisible = loadState is LoadState.Error
                 retryButton.isVisible = loadState is LoadState.Error
             }
         }
@@ -43,7 +43,7 @@ class CoursesLoadStateAdapter(private val retry :()->Unit):LoadStateAdapter<Cour
         parent: ViewGroup,
         loadState: LoadState
     ): CoursesLoadStateViewHolder {
-        val binding = LoadingStateLayoutBinding.inflate(LayoutInflater.from(parent.context),parent,false)
+        val binding = CoursesLoadingStateLayoutBinding.inflate(LayoutInflater.from(parent.context),parent,false)
         return CoursesLoadStateViewHolder(binding)
     }
 

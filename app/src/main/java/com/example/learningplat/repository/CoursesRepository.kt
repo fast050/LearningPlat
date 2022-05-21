@@ -1,13 +1,10 @@
 package com.example.learningplat.repository
 
-import androidx.paging.Pager
-import androidx.paging.PagingConfig
 import androidx.paging.PagingData
-import com.example.learningplat.data.CoursesPagingSource
-import com.example.learningplat.data.model.Courses
-import com.example.learningplat.data.network.CoursesApiService
+import com.example.learningplat.data.model.courseslist.Courses
+import com.example.learningplat.data.model.coursesreview.CourseReviewResponse
 import kotlinx.coroutines.flow.Flow
-import javax.inject.Inject
+import retrofit2.Response
 
 
 interface CoursesRepository {
@@ -17,5 +14,9 @@ interface CoursesRepository {
         category: String? = null,
         priceType: String? = null
     ): Flow<PagingData<Courses>>
+
+    suspend fun getReviewList(courseId:Int) : Response<CourseReviewResponse>
+
+
 
 }

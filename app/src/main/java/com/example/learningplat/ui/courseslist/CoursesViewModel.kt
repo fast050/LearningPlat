@@ -1,13 +1,11 @@
-package com.example.learningplat.ui.courses
+package com.example.learningplat.ui.courseslist
 
 import androidx.lifecycle.*
 import androidx.paging.cachedIn
-import com.example.learningplat.data.model.Courses
+import com.example.learningplat.data.model.coursesreview.CourseReviews
 import com.example.learningplat.repository.CoursesRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
-import java.lang.Exception
-import java.lang.IllegalArgumentException
 import javax.inject.Inject
 
 enum class Price(val priceValue: String) {
@@ -28,6 +26,7 @@ class CoursesViewModel @Inject constructor(private val coursesRepository: Course
             search = it.first
             ).cachedIn(viewModelScope).asLiveData()
     }
+
 }
 
 class PairMediatorLiveData<F, S>(firstLiveData: LiveData<F>, secondLiveData: LiveData<S>) :

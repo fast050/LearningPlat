@@ -1,11 +1,9 @@
-package com.example.learningplat.ui.courses
+package com.example.learningplat.ui.courseslist
 
 import android.os.Bundle
-import android.provider.Settings.System.putString
 import androidx.navigation.Navigation
 import androidx.navigation.testing.TestNavHostController
 import androidx.recyclerview.widget.RecyclerView
-import androidx.test.InstrumentationRegistry
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.espresso.Espresso.*
 import androidx.test.espresso.action.ViewActions.click
@@ -13,8 +11,9 @@ import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.contrib.RecyclerViewActions
 import androidx.test.espresso.matcher.ViewMatchers.*
 import com.example.learningplat.R
-import com.example.learningplat.data.model.Courses
+import com.example.learningplat.data.model.courseslist.Courses
 import com.example.learningplat.launchFragmentInHiltContainer
+import com.example.learningplat.ui.coursedetail.CourseDetailFragment
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
 import org.hamcrest.CoreMatchers.containsString

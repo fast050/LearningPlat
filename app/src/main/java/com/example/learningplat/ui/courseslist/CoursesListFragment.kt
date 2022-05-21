@@ -1,35 +1,28 @@
-package com.example.learningplat.ui.courses
+package com.example.learningplat.ui.courseslist
 
 import android.os.Bundle
-import android.util.Log
 import android.view.*
 import androidx.appcompat.widget.SearchView
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.paging.LoadState
-import androidx.paging.map
-import com.example.learningplat.CoursesApplication
 import com.example.learningplat.R
 import com.example.learningplat.databinding.FragmentCoursesListBinding
-import com.example.learningplat.ui.adapter.CoursesAdapter
-import com.example.learningplat.ui.adapter.CoursesLoadStateAdapter
+import com.example.learningplat.ui.SharedViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.launch
 
 
 @AndroidEntryPoint
 class CoursesListFragment : Fragment() {
 
-
     private var _binding: FragmentCoursesListBinding? = null
     private val binding get() = _binding!!
 
     private val viewModel by viewModels<CoursesViewModel>()
+    private val sharedViewModel by activityViewModels<SharedViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -74,10 +67,11 @@ class CoursesListFragment : Fragment() {
     private fun setUpRecyclerView() {
 
         val adapter = CoursesAdapter { courseClicked ->
+
+            sharedViewModel.setCourseDetail(courseClicked)
+
             val action =
-                CoursesListFragmentDirections.actionCoursesListFragmentToCourseDetailFragment(
-                    courseClicked, courseClicked.title ?: "Course"
-                )
+                CoursesListFragmentDirections.actionCoursesListFragmentToCourseDetailFragment(courseClicked.title!!)
             findNavController().navigate(action)
 
         }
@@ -93,9 +87,6 @@ class CoursesListFragment : Fragment() {
         }
 
         adapter.addLoadStateListener { loadState ->
-
-           // binding.progressBar.playAnimation()
-           // animationView.cancelAnimation();
 
             binding.messageToUser.isVisible = loadState.source.refresh is LoadState.Error
             binding.courseRecyclerView.isVisible =

@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingTop="@dimen/spacing_small"
+        android:paddingBottom="@dimen/spacing_small">
+
+        <TextView
+            android:id="@+id/user_name_text"
+            style="@style/LearningPlat.Text.Title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:text="@string/user_name_example"
+            app:layout_constraintEnd_toStartOf="@+id/guideline2"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/imageView"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <RatingBar
+            android:id="@+id/user_rate_rating_bar"
+            style="@style/LearningPlat.RatingBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toTopOf="@+id/user_comment_text"
+            app:layout_constraintStart_toStartOf="@+id/user_name_text"
+            app:layout_constraintTop_toBottomOf="@+id/user_name_text"
+            app:layout_constraintVertical_bias="0.51" />
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@color/black"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="@+id/user_rate_rating_bar"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/user_name_text" />
+
+        <TextView
+            android:id="@+id/user_rate_text"
+            style="@style/LearningPlat.Text.Title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/spacing_small"
+            android:text="5.0"
+            app:layout_constraintBottom_toBottomOf="@+id/user_rate_rating_bar"
+            app:layout_constraintStart_toEndOf="@+id/user_rate_rating_bar"
+            app:layout_constraintTop_toTopOf="@+id/user_rate_rating_bar" />
+
+        <TextView
+            android:id="@+id/comment_time_text"
+            style="@style/LearningPlat.Text.SubTitle.Big"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:text="@string/comment_time_example"
+            app:layout_constraintBottom_toBottomOf="@+id/user_rate_rating_bar"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="@+id/guideline2"
+            app:layout_constraintTop_toTopOf="@+id/user_name_text"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <TextView
+            android:id="@+id/user_comment_text"
+            style="@style/LearningPlat.Text.SubTitle.Big"
+            android:layout_width="0dp"
+            android:padding="@dimen/spacing_small"
+            android:layout_height="wrap_content"
+            android:text="@string/user_comment_example"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/comment_time_text"
+            app:layout_constraintStart_toStartOf="@+id/user_rate_rating_bar"
+            app:layout_constraintTop_toBottomOf="@+id/user_rate_rating_bar" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.7" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>

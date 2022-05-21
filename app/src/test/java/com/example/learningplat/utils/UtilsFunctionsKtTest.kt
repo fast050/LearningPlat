@@ -1,6 +1,6 @@
 package com.example.learningplat.utils
 
-import com.example.learningplat.data.model.Courses
+import com.example.learningplat.data.model.courseslist.Courses
 import junit.framework.Assert.*
 import org.junit.Test
 

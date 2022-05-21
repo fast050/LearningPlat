@@ -3,9 +3,8 @@ package com.example.learningplat.repository
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.asFlow
 import androidx.paging.PagingData
-import com.example.learningplat.data.model.Courses
+import com.example.learningplat.data.model.courseslist.Courses
 import kotlinx.coroutines.flow.Flow
-import org.junit.Assert.*
 
 class FakeCoursesRepository :CoursesRepository{
 
