@@ -1,9 +1,9 @@
 package com.example.learningplat.di
 
-import com.example.learningplat.data.network.CoursesApi
-import com.example.learningplat.data.network.CoursesApiService
-import com.example.learningplat.repository.CoursesRepository
-import com.example.learningplat.repository.DefaultCoursesRepository
+import com.example.learningplat.data.network.api.CoursesApi
+import com.example.learningplat.data.network.api.CoursesApiService
+import com.example.learningplat.domain.repository.CoursesRepository
+import com.example.learningplat.data.repository.CoursesRepositoryImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -25,8 +25,8 @@ object CoursesModule {
 
     @Provides
     @Singleton
-    fun provideCoursesRepository(api:CoursesApiService):CoursesRepository
-    =DefaultCoursesRepository(api)
+    fun provideCoursesRepository(api: CoursesApiService):CoursesRepository
+    = CoursesRepositoryImpl(api)
 
 
 }

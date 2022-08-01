@@ -6,18 +6,21 @@
     app:startDestination="@id/coursesListFragment">
     <fragment
         android:id="@+id/courseDetailFragment"
-        android:name="com.example.learningplat.ui.coursedetail.CourseDetailFragment"
+        android:name="com.example.learningplat.presentation.ui.coursedetail.CourseDetailFragment"
         android:label="{courseName}"
         tools:layout="@layout/fragment_course_detail">
 
         <argument
             android:name="courseName"
             app:argType="string" />
+        <argument
+            android:name="courseDetailItem"
+            app:argType="com.example.learningplat.domain.model.Courses" />
 
     </fragment>
     <fragment
         android:id="@+id/coursesListFragment"
-        android:name="com.example.learningplat.ui.courseslist.CoursesListFragment"
+        android:name="com.example.learningplat.presentation.ui.courseslist.CoursesListFragment"
         android:label="Courses"
         tools:layout="@layout/fragment_courses_list">
         <action
@@ -25,11 +28,6 @@
             app:destination="@id/courseDetailFragment" />
 
     </fragment>
-    <fragment
-        android:id="@+id/courseInfoFragment2"
-        android:name="com.example.learningplat.ui.coursedetail.info.CourseInfoFragment"
-        android:label="fragment_course_info"
-        tools:layout="@layout/fragment_course_info" />
 
 
 </navigation>

@@ -6,7 +6,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.courseslist.CoursesListFragment">
+    tools:context="com.example.learningplat.presentation.ui.courseslist.CoursesListFragment">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/course_RecyclerView"

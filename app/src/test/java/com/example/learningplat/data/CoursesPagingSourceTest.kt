@@ -2,7 +2,8 @@ package com.example.learningplat.data
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.paging.PagingSource
-import com.example.learningplat.data.network.CoursesApiService
+import com.example.learningplat.data.network.api.CoursesApiService
+import com.example.learningplat.data.paging.CoursesPagingSource
 import com.example.learningplat.network.MockResponseFileReader
 import com.google.common.truth.Truth.assertThat
 import com.google.gson.Gson
@@ -62,7 +63,7 @@ class CoursesPagingSourceTest {
             enqueue(MockResponse().setBody(MockResponseFileReader("courses_response.json").content))
         }
 
-            val result = CoursesPagingSource(coursesApiCall).load(
+            val result = CoursesPagingSource(coursesApiCall,null,null).load(
                 PagingSource.LoadParams.Refresh(key = null, loadSize = 2, placeholdersEnabled = false)
             )
 

@@ -1,10 +1,7 @@
 package com.example.learningplat.network
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import androidx.lifecycle.asLiveData
-import com.example.learningplat.data.network.CoursesApi
-import com.example.learningplat.data.network.CoursesApiService
-import com.example.learningplat.repository.DefaultCoursesRepository
+import com.example.learningplat.data.network.api.CoursesApiService
 import com.google.common.truth.Truth.assertThat
 import com.google.gson.Gson
 import kotlinx.coroutines.runBlocking
@@ -20,7 +17,6 @@ import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import java.util.concurrent.TimeUnit
 
 @RunWith(JUnit4::class)
 class CoursesApiTest {

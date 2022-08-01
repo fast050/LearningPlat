@@ -1,183 +1,206 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
+
+<androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.coursedetail.review.CourseReviewsFragment">
+    android:layout_height="match_parent">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <ProgressBar
+        android:id="@+id/main_reviews_progressBar"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:foregroundGravity="center"
+        app:layout_constraintBottom_toBottomOf="@+id/reviews_nestedScrollView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/reviews_nestedScrollView" />
+
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/reviews_nestedScrollView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        tools:visibility="visible"
+        android:visibility="invisible"
+        android:layout_height="match_parent"
+        tools:context="com.example.learningplat.presentation.ui.coursedetail.review.CourseReviewsFragment">
 
-
-        <TextView
-            android:id="@+id/courseRateNumber"
-            style="@style/LearningPlat.Text.Title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="3.5"
-            android:textSize="46sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <RatingBar
-            android:id="@+id/courseRateStars"
-            style="@style/LearningPlat.RatingBar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:rating="3.5"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/courseRateNumber" />
-
-        <TextView
-            android:id="@+id/reviews_base_on_text"
-            style="@style/LearningPlat.Text.SubTitle.Big"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="base on 500 reviews"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/courseRateStars" />
-
-        <ProgressBar
-            android:id="@+id/excellent_rating_bar"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
-            style="@style/LearningPlat.progressBar.Rating"
-            android:progressTint="@color/greenDark"
-            app:layout_constraintBottom_toBottomOf="@+id/textView"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/good_rating_bar"
-            app:layout_constraintTop_toTopOf="@+id/textView" />
-
-        <ProgressBar
-            android:id="@+id/good_rating_bar"
-            style="@style/LearningPlat.progressBar.Rating"
-            android:progressTint="@color/greenLight"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
-            app:layout_constraintBottom_toBottomOf="@+id/textView2"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="@+id/average_rating_bar"
-            app:layout_constraintTop_toTopOf="@+id/textView2" />
-
-        <ProgressBar
-            android:id="@+id/average_rating_bar"
-            style="@style/LearningPlat.progressBar.Rating"
-            android:progressTint="@color/yellow"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
-            app:layout_constraintBottom_toBottomOf="@+id/textView3"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="@+id/below_average_rating_bar"
-            app:layout_constraintTop_toTopOf="@+id/textView3" />
-
-        <ProgressBar
-            android:id="@+id/below_average_rating_bar"
-            style="@style/LearningPlat.progressBar.Rating"
-            android:progressTint="@color/orange"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
-            app:layout_constraintBottom_toBottomOf="@+id/textView4"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/textView4"
-            app:layout_constraintTop_toTopOf="@+id/textView4" />
-
-        <ProgressBar
-            android:id="@+id/poor_rating_bar"
-            style="@style/LearningPlat.progressBar.Rating"
-            android:progressTint="@color/red"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
-            app:layout_constraintBottom_toBottomOf="@+id/textView5"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="@+id/below_average_rating_bar"
-            app:layout_constraintTop_toTopOf="@+id/textView5" />
-
-
-        <View
-            android:id="@+id/detail_divider"
-            style="@style/LearningPlat.Divider"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView5" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/reviews_recycler_view"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="16dp"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/detail_divider"
-            tools:listitem="@layout/course_review_item" />
+            android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:text="Excellent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/reviews_base_on_text" />
 
-        <TextView
-            android:id="@+id/textView2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="Good"
-            app:layout_constraintStart_toStartOf="@+id/textView"
-            app:layout_constraintTop_toBottomOf="@+id/textView" />
+            <TextView
+                android:id="@+id/courseRateNumber"
+                style="@style/LearningPlat.Text.Title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="3.5"
+                android:textSize="46sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/textView3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="Average"
-            app:layout_constraintStart_toStartOf="@+id/textView2"
-            app:layout_constraintTop_toBottomOf="@+id/textView2" />
+            <RatingBar
+                android:id="@+id/courseRateStars"
+                style="@style/LearningPlat.RatingBar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:rating="3.5"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/courseRateNumber" />
 
-        <TextView
-            android:id="@+id/textView4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="Below Average"
-            app:layout_constraintStart_toStartOf="@+id/textView3"
-            app:layout_constraintTop_toBottomOf="@+id/textView3" />
+            <TextView
+                android:id="@+id/reviews_base_on_text"
+                style="@style/LearningPlat.Text.SubTitle.Big"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="base on 500 reviews"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/courseRateStars" />
 
-        <TextView
-            android:id="@+id/textView5"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="poor"
-            app:layout_constraintStart_toStartOf="@+id/textView4"
-            app:layout_constraintTop_toBottomOf="@+id/textView4" />
+            <ProgressBar
+                android:id="@+id/excellent_rating_bar"
+                style="@style/LearningPlat.progressBar.Rating"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:progressTint="@color/greenDark"
+                app:layout_constraintBottom_toBottomOf="@+id/excellent_textView"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/good_rating_bar"
+                app:layout_constraintTop_toTopOf="@+id/excellent_textView" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
-</ScrollView>
+            <ProgressBar
+                android:id="@+id/good_rating_bar"
+                style="@style/LearningPlat.progressBar.Rating"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:progressTint="@color/greenLight"
+                app:layout_constraintBottom_toBottomOf="@+id/good_textView"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="@+id/average_rating_bar"
+                app:layout_constraintTop_toTopOf="@+id/good_textView" />
+
+            <ProgressBar
+                android:id="@+id/average_rating_bar"
+                style="@style/LearningPlat.progressBar.Rating"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:progressTint="@color/yellow"
+                app:layout_constraintBottom_toBottomOf="@+id/average_textView"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="@+id/below_average_rating_bar"
+                app:layout_constraintTop_toTopOf="@+id/average_textView" />
+
+            <ProgressBar
+                android:id="@+id/below_average_rating_bar"
+                style="@style/LearningPlat.progressBar.Rating"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:progressTint="@color/orange"
+                app:layout_constraintBottom_toBottomOf="@+id/below_average_textView"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/below_average_textView"
+                app:layout_constraintTop_toTopOf="@+id/below_average_textView" />
+
+            <ProgressBar
+                android:id="@+id/poor_rating_bar"
+                style="@style/LearningPlat.progressBar.Rating"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:progressTint="@color/red"
+                app:layout_constraintBottom_toBottomOf="@+id/poor_textView"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="@+id/below_average_rating_bar"
+                app:layout_constraintTop_toTopOf="@+id/poor_textView" />
+
+
+            <View
+                android:id="@+id/detail_divider"
+                style="@style/LearningPlat.Divider"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/poor_textView" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/reviews_recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="16dp"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/detail_divider"
+                tools:listitem="@layout/course_review_item" />
+
+            <TextView
+                android:id="@+id/excellent_textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:text="Excellent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/reviews_base_on_text" />
+
+            <TextView
+                android:id="@+id/good_textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="Good"
+                app:layout_constraintStart_toStartOf="@+id/excellent_textView"
+                app:layout_constraintTop_toBottomOf="@+id/excellent_textView" />
+
+            <TextView
+                android:id="@+id/average_textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="Average"
+                app:layout_constraintStart_toStartOf="@+id/good_textView"
+                app:layout_constraintTop_toBottomOf="@+id/good_textView" />
+
+            <TextView
+                android:id="@+id/below_average_textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="Below Average"
+                app:layout_constraintStart_toStartOf="@+id/average_textView"
+                app:layout_constraintTop_toBottomOf="@+id/average_textView" />
+
+            <TextView
+                android:id="@+id/poor_textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="poor"
+                app:layout_constraintStart_toStartOf="@+id/below_average_textView"
+                app:layout_constraintTop_toBottomOf="@+id/below_average_textView" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

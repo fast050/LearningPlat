@@ -9,7 +9,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/courses_detail_fragment"
-    tools:context=".ui.coursedetail.CourseDetailFragment">
+    tools:context="com.example.learningplat.presentation.ui.coursedetail.CourseDetailFragment">
 
 
     <com.google.android.material.tabs.TabLayout

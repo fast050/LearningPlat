@@ -6,7 +6,7 @@
     <string name="title">course name</string>
     <string name="secondary_text">instertor name</string>
     <string name="supporting_text">price type</string>
-    <!-- TODO: Remove or change this placeholder text -->
+
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="search">Search</string>
     <string name="filter">filter</string>
@@ -19,4 +19,20 @@
     <string name="title_activity_detail">DetailActivity</string>
     <string name="tab_text_1">Tab 1</string>
     <string name="tab_text_2">Tab 2</string>
+    <string name="all_type">All</string>
+
+    <string name="business">Business</string>
+    <string name="development">Development</string>
+    <string name="finance_accounting">Finance &amp; Accounting</string>
+    <string name="health_fitness">Health &amp; Fitness</string>
+    <string name="IT_software">IT &amp; Software</string>
+    <string name="Lifestyle">Lifestyle</string>
+    <string name="music">Music</string>
+    <string name="personal_development">Personal Development</string>
+    <string name="office_productivity">Office Productivity</string>
+    <string name="photography_video">Photography &amp; Video</string>
+    <string name="teaching_academics">Teaching &amp; Academics</string>
+    <string name="design">Design</string>
+
+
 </resources>
