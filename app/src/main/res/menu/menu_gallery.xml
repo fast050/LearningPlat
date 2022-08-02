@@ -9,27 +9,11 @@
         app:actionViewClass="androidx.appcompat.widget.SearchView"
         app:showAsAction="ifRoom|collapseActionView" />
 
-
-
     <item
         android:icon="@drawable/ic_sort"
-        android:title="Sort"
-        app:showAsAction="always">
-
-        <menu>
-
-            <item
-                android:id="@+id/Free_type"
-                android:title="Free"/>
-            <item
-                android:id="@+id/Paid_type"
-                android:title="Paid"/>
-
-        </menu>
-
-    </item>
-
-
+        app:showAsAction="always"
+        android:id="@+id/Flitter"
+        android:title="flitter"/>
 
 
 </menu>

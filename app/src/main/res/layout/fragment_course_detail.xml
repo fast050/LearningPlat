@@ -1,108 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<layout xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    xmlns:android="http://schemas.android.com/apk/res/android">
-
     <androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    style="AppTheme"
+    android:background="?attr/colorSurface"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/courses_detail_fragment"
+    tools:context="com.example.learningplat.presentation.ui.coursedetail.CourseDetailFragment">
+
+
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tab_layout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".ui.courses.CourseDetailFragment">
-
-        <!-- Media -->
-        <ImageView
-            android:id="@+id/course_detail_image_course_picture"
-            android:layout_width="match_parent"
-            android:layout_height="250dp"
-            android:contentDescription="@string/content_description_media"
-            android:scaleType="centerCrop"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:src="@tools:sample/backgrounds/scenic" />
-
-        <!-- Media -->
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:tabTextAppearance="@style/TextAppearance.AppCompat.Large" />
 
 
-        <androidx.cardview.widget.CardView
-            android:id="@+id/cardView"
-            android:layout_width="56dp"
-            android:layout_height="56dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="16dp"
-            app:cardCornerRadius="@dimen/spacing_small"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/course_detail_image_course_picture">
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/detail_pager"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tab_layout" />
 
-            <ImageView
-                android:id="@+id/course_detail_image_instructor_picture"
-                android:layout_width="56dp"
-                android:layout_height="56dp"
-                android:contentDescription="@string/content_description_media"
-                android:scaleType="centerCrop"
-                tools:src="@tools:sample/backgrounds/scenic" />
-        </androidx.cardview.widget.CardView>
-
-        <TextView
-            android:id="@+id/course_detail_text_instructor_name"
-            style="@style/LearningPlat.Text.Title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:text="instructor name"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/cardView" />
-
-        <TextView
-            android:id="@+id/course_detail_text_price"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="8dp"
-            android:text="$10.00"
-            style="@style/LearningPlat.Text.SubTitle.Big"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/course_detail_image_course_picture" />
-
-        <TextView
-            android:id="@+id/course_detail_instructor_text_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            style="@style/LearningPlat.Text.SubTitle"
-            android:text="Web Developer, Designer, and Teacher"
-            app:layout_constraintStart_toStartOf="@+id/course_detail_text_instructor_name"
-            app:layout_constraintTop_toBottomOf="@+id/course_detail_text_instructor_name" />
-
-        <TextView
-            android:id="@+id/course_detail_text_summary"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="8dp"
-            android:lineSpacingExtra="@dimen/spacing_small"
-            android:text='"Learn web design in 1 hour with 25+ simple-to-use rules and guidelines — tons of amazing web design resources included!'
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/course_detail_instructor_text_title" />
-
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/course_detail_button_apply"
-            style="?attr/borderlessButtonStyle"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="8dp"
-            android:text="@string/action_1"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-</layout>
-
+</androidx.constraintlayout.widget.ConstraintLayout>

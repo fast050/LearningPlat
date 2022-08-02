@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="order_by_array">
+        <item>---</item>
+        <item>most reviewed</item>
+        <item>highest rated</item>
+        <item>newest</item>
+    </string-array>
+</resources>

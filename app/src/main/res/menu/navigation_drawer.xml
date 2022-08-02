@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group
+        android:id="@+id/group4"
+        android:checkableBehavior="single">
+            <item
+                android:title="home" />
+            <item
+                android:title="category" />
+            <item
+                android:title="save" />
+    </group>
+    <item android:title="setting"
+          android:id="@+id/setting_menu"
+        />
+
+</menu>
+
+
