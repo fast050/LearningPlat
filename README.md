@@ -16,7 +16,7 @@ An app that helps learners across the world to find high-quality courses on Udem
 https://www.udemy.com/developers/affiliate/
 
 # Architecture
-- MVVM : (Model — View — ViewModel)
+- Clean Architecture MVVM
 
 # Screenshot 
 
