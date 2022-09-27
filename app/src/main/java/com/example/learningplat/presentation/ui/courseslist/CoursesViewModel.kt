@@ -18,11 +18,10 @@ class CoursesViewModel @Inject constructor(private val coursesRepository: Course
     val setting  =  filterSetting.filterSetting.asLiveData()
 
     val pagingCourses =
-        (PairMediatorLiveData(query,setting))
-            .switchMap { (query , setting)->
+        (query).switchMap {
                 coursesRepository.getPagedCourses(
-                    search = query,
-                    filterSetting = setting
+                    search = it,
+                    filterSetting = null
                 ).cachedIn(viewModelScope).asLiveData()
             }
 
